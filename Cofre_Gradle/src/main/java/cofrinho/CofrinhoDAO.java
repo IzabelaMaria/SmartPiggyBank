@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 
 public class CofrinhoDAO {
 
-    // objeto respons√°vel pela conex√£o com o servidor do banco de dados
+    // objeto respons·vel pela conex„o com o servidor do banco de dados
     Connection con;
-    // objeto respons√°vel por preparar as consultas DINAMICAS
+    // objeto respons·vel por preparar as consultas DINAMICAS
     PreparedStatement pst;
-    // objeto respons√°vel por executar as consultas STATICAS
+    // objeto respons·vel por executar as consultas STATICAS
     Statement st;
-    // objeto respons√°vel por referencia a tabela resultante da busca
+    // objeto respons·vel por referencia a tabela resultante da busca
     ResultSet rs;
 
     String banco = "Cofrinho";
@@ -27,16 +27,18 @@ public class CofrinhoDAO {
 
     boolean sucesso = false;
 
-    public void conectarnoBanco() {
+    public boolean conectarnoBanco() {
         try {
             con = DriverManager.getConnection(url, usuario, senha);
+            sucesso = true;
 
-          // JOptionPane.showMessageDialog(null, "Conex√£o feita com sucesso!");
+          // JOptionPane.showMessageDialog(null, "Conex„o feita com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de conex√£o: " + ex.getMessage());
-
+            JOptionPane.showMessageDialog(null, "Erro de conex„o: " + ex.getMessage());
+            sucesso = false;
         }
+        return sucesso;
     }
 
     public boolean NovoCofrinho(String nome, int i) {
@@ -217,7 +219,7 @@ public class CofrinhoDAO {
 
             while (rs.next()) {
                 num = rs.getInt("count(valorMoeda)");
-                JOptionPane.showMessageDialog(null, "N√∫mero de moedas: " + num);
+                JOptionPane.showMessageDialog(null, "N˙mero de moedas: " + num);
 
             }
 
@@ -281,7 +283,7 @@ public class CofrinhoDAO {
         return sucesso;
     }
 
-    public void pegaNome(int id) {
+    public boolean pegaNome(int id) {
 
         String nome;
         conectarnoBanco();
@@ -297,10 +299,10 @@ public class CofrinhoDAO {
 
             while (rs.next()) {
                 nome = rs.getString("nomeDono");
-                JOptionPane.showMessageDialog(null, " Ol√° " + nome);
-
+                JOptionPane.showMessageDialog(null, " Ol· " + nome);
+                
             }
-
+            sucesso = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro! = " + ex.getMessage());
 
@@ -319,7 +321,7 @@ public class CofrinhoDAO {
             }
 
         }
-
+        return sucesso;
     }
    public float MoedasNoCofrinho(int id) {
 
