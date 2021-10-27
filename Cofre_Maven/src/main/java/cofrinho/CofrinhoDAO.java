@@ -27,16 +27,18 @@ public class CofrinhoDAO {
 
     boolean sucesso = false;
 
-    public void conectarnoBanco() {
+    public boolean conectarnoBanco() {
         try {
             con = DriverManager.getConnection(url, usuario, senha);
+            sucesso = true;
 
           // JOptionPane.showMessageDialog(null, "Conexão feita com sucesso!");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro de conexão: " + ex.getMessage());
-
+            sucesso = false;
         }
+        return sucesso;
     }
 
     public boolean NovoCofrinho(String nome, int i) {
@@ -281,7 +283,7 @@ public class CofrinhoDAO {
         return sucesso;
     }
 
-    public void pegaNome(int id) {
+    public boolean pegaNome(int id) {
 
         String nome;
         conectarnoBanco();
@@ -298,9 +300,9 @@ public class CofrinhoDAO {
             while (rs.next()) {
                 nome = rs.getString("nomeDono");
                 JOptionPane.showMessageDialog(null, " Olá " + nome);
-
+                
             }
-
+            sucesso = true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro! = " + ex.getMessage());
 
@@ -319,7 +321,7 @@ public class CofrinhoDAO {
             }
 
         }
-
+        return sucesso;
     }
    public float MoedasNoCofrinho(int id) {
 
