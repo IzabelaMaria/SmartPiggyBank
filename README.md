@@ -1,5 +1,12 @@
 # :pig: Smart Piggy Bank :moneybag:
 
+#
+<p align="center">
+  :construction: EM CONSTRUÇÃO :construction:
+</p>
+
+#
+
 ### O que é este Projeto?
 #
 Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por múltiplos usuários(cada um tem um id em um banco de dados), com as seguintes funções:
@@ -30,14 +37,9 @@ Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por 
 
 :white_check_mark:[Apache Maven](https://maven.apache.org/)
 
-:white_check_mark:[Gradle](https://gradle.org/)
 
 
-### Como funciona?
-#
-#### Este Projeto tem duas versões: Uma que utiliza a gerência do Maven, e outra que usa a gerência do Gradle.
-
-:rocket:Versão com Maven:
+### :rocket: Como executar
 
 :one:[Clone](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository) este projeto em seu computador
 
@@ -48,21 +50,5 @@ Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por 
 :four:Execute a classe "TelaCofrinho.java"
 
 :five:Será aberta a janela do cofre, onde você pode realizar as funções já escritas anteriormente!
-
-#
-
-:rocket:Versão com Gradle:
-
-:one:[Clone](https://docs.github.com/pt/repositories/creating-and-managing-repositories/cloning-a-repository) este projeto em seu computador
-
-:two:Abra-o utilizando o Apache Netbeans 12.0
-
-:three:[Importe](https://stackoverflow.com/questions/15884693/how-can-i-import-data-into-mysql-database-via-mysql-workbench) o script do banco de dados em seu MySQL Workbench e mantenha o banco de dados aberto
-
-:four:Abra a classe "CofrinhoInteligente.java"
-
-:five:Selecione todo o código da classe, e digite Shift+F6
-
-:six:Será aberta a janela do cofre, onde você pode realizar as funções já escritas anteriormente!
 
 
