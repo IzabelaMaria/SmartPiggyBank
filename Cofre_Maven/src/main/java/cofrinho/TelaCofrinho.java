@@ -1,7 +1,19 @@
-
 package cofrinho;
 
+import ManageCSV.OpenCSV;
+import ManageCSV.WriteCSV;
+import static java.awt.SystemColor.text;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 public class TelaCofrinho extends javax.swing.JFrame {
 
@@ -10,13 +22,17 @@ public class TelaCofrinho extends javax.swing.JFrame {
      */
     public TelaCofrinho() {
         initComponents();
+
     }
     int idtmp;
-    CofrinhoDAO c1;
-    Moeda m1;
-    int iglobal=0;
-    
-    
+    String nome = null;
+    int iglobal = -1;
+    int check = 0;
+    int quant = 0;
+    Cofrinho cofre;
+    Operations op = new Operations();
+    List<Cofrinho> cofrinhos = new ArrayList<>();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,12 +43,6 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jvalorTotal = new javax.swing.JButton();
-        jBMaiorMoeda = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,77 +58,33 @@ public class TelaCofrinho extends javax.swing.JFrame {
         jBpegaid = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jsair = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jTquantidade = new javax.swing.JTextField();
+        jBpegaQuantidade = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jBMaiorMoeda = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jBMenorMoeda = new javax.swing.JButton();
+        jvalorTotal = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jBMoedasNoCofre = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jBCambio = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTelaSaida = new javax.swing.JTextArea();
+        jTStatusPoupanca = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jBexport = new javax.swing.JButton();
+        jBimport = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COFRINHO INTELIGENTE");
         setBackground(new java.awt.Color(102, 102, 255));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jPanel3.setBackground(new java.awt.Color(105, 176, 247));
-
-        jPanel4.setBackground(new java.awt.Color(110, 178, 246));
-
-        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText(" Valor Total:");
-
-        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText(" Valor da maior moeda:");
-
-        jvalorTotal.setBackground(new java.awt.Color(214, 214, 110));
-        jvalorTotal.setText("Buscar");
-        jvalorTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jvalorTotalActionPerformed(evt);
-            }
-        });
-
-        jBMaiorMoeda.setBackground(new java.awt.Color(214, 214, 110));
-        jBMaiorMoeda.setText("Buscar");
-        jBMaiorMoeda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBMaiorMoedaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(170, 170, 170))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBMaiorMoeda))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jvalorTotal)))
-                        .addGap(29, 29, 29))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jvalorTotal)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBMaiorMoeda)
-                    .addComponent(jLabel6))
-                .addGap(96, 96, 96))
-        );
+        jPanel3.setBackground(new java.awt.Color(186, 186, 90));
 
         jPanel1.setBackground(new java.awt.Color(214, 214, 110));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 102, 0)));
@@ -144,17 +110,17 @@ public class TelaCofrinho extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Inserir moeda:");
 
-        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Retirar moeda:");
 
         jBinserirvalor.setBackground(new java.awt.Color(214, 214, 110));
         jBinserirvalor.setText("Inserir");
-        jBinserirvalor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 0), 1, true));
+        jBinserirvalor.setBorder(null);
         jBinserirvalor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBinserirvalorActionPerformed(evt);
@@ -163,7 +129,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
 
         jBretirarvalor.setBackground(new java.awt.Color(214, 214, 110));
         jBretirarvalor.setText("Retirar");
-        jBretirarvalor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 0), 1, true));
+        jBretirarvalor.setBorder(null);
         jBretirarvalor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBretirarvalorActionPerformed(evt);
@@ -184,9 +150,9 @@ public class TelaCofrinho extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Não tem um cofrinho? Clique aqui:");
 
-        jBnovoCofrinho.setBackground(new java.awt.Color(214, 214, 110));
+        jBnovoCofrinho.setBackground(new java.awt.Color(204, 204, 0));
         jBnovoCofrinho.setText("Novo Cofrinho");
-        jBnovoCofrinho.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 0), 1, true));
+        jBnovoCofrinho.setBorder(null);
         jBnovoCofrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBnovoCofrinhoActionPerformed(evt);
@@ -202,15 +168,132 @@ public class TelaCofrinho extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/porquinho.jpg"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piggybank_resized.png"))); // NOI18N
 
-        jsair.setBackground(new java.awt.Color(244, 133, 133));
+        jsair.setBackground(new java.awt.Color(255, 204, 204));
         jsair.setText("Sair");
+        jsair.setBorder(null);
         jsair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jsairActionPerformed(evt);
             }
         });
+
+        jLabel11.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Quantidade de moedas:");
+
+        jBpegaQuantidade.setBackground(new java.awt.Color(214, 214, 110));
+        jBpegaQuantidade.setText("Ok");
+        jBpegaQuantidade.setBorder(null);
+        jBpegaQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBpegaQuantidadeActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Valor da maior moeda:");
+
+        jBMaiorMoeda.setBackground(new java.awt.Color(214, 214, 110));
+        jBMaiorMoeda.setText("Buscar");
+        jBMaiorMoeda.setBorder(null);
+        jBMaiorMoeda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMaiorMoedaActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Moedas no cofre:");
+
+        jLabel12.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Valor da menor moeda:");
+
+        jBMenorMoeda.setBackground(new java.awt.Color(214, 214, 110));
+        jBMenorMoeda.setText("Buscar");
+        jBMenorMoeda.setBorder(null);
+        jBMenorMoeda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMenorMoedaActionPerformed(evt);
+            }
+        });
+
+        jvalorTotal.setBackground(new java.awt.Color(214, 214, 110));
+        jvalorTotal.setText("Buscar");
+        jvalorTotal.setBorder(null);
+        jvalorTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jvalorTotalActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Valor Total:");
+
+        jBMoedasNoCofre.setBackground(new java.awt.Color(214, 214, 110));
+        jBMoedasNoCofre.setText("Buscar");
+        jBMoedasNoCofre.setBorder(null);
+        jBMoedasNoCofre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMoedasNoCofreActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Converter poupança para dólar/euro:");
+
+        jBCambio.setBackground(new java.awt.Color(214, 214, 110));
+        jBCambio.setText("Converter");
+        jBCambio.setBorder(null);
+        jBCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCambioActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jScrollPane1ComponentMoved(evt);
+            }
+        });
+
+        jTelaSaida.setColumns(20);
+        jTelaSaida.setRows(5);
+        jTelaSaida.setTabSize(50);
+        jTelaSaida.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setViewportView(jTelaSaida);
+
+        jLabel15.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Situação da poupança:");
+
+        jBexport.setBackground(new java.awt.Color(214, 214, 110));
+        jBexport.setText("Export");
+        jBexport.setBorder(null);
+        jBexport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBexportActionPerformed(evt);
+            }
+        });
+
+        jBimport.setBackground(new java.awt.Color(214, 214, 110));
+        jBimport.setText("Import");
+        jBimport.setBorder(null);
+        jBimport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBimportActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("CSV:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -223,76 +306,157 @@ public class TelaCofrinho extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jsair))))
+                        .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(392, 392, 392)
+                        .addComponent(jsair, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(138, 138, 138))
+                                .addComponent(jBinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBpegaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(364, 364, 364))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTpegarid, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBpegaid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jBCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(143, 143, 143))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(168, 168, 168)
-                                        .addComponent(jBretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addComponent(jTStatusPoupanca, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(65, 65, 65)
+                                                .addComponent(jLabel15))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTpegarid, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jBpegaid, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jBMenorMoeda, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel13)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jvalorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jBMoedasNoCofre, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jBinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(88, 88, 88)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel10)
-                        .addGap(68, 68, 68))))
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jBexport, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBimport, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jBMaiorMoeda, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)))
+                        .addGap(38, 38, 38))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jTpegarid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBpegaid))
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                            .addComponent(jBpegaid, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jsair)
-                            .addComponent(jLabel8)
-                            .addComponent(jBnovoCofrinho)))))
+                            .addComponent(jBexport, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBimport, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                        .addGap(47, 47, 47))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBpegaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBinserirvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBretirarvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jBMaiorMoeda, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jBMenorMoeda, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jvalorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jBMoedasNoCofre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jBCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTStatusPoupanca, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jsair, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,19 +474,43 @@ public class TelaCofrinho extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBpegaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpegaidActionPerformed
+        jTelaSaida.setText("");
+        jTStatusPoupanca.setText("");
         String txt = jTpegarid.getText();
         idtmp = Integer.parseInt(txt);
-        c1=new CofrinhoDAO();
-        c1.pegaNome(idtmp);
+        if (!cofrinhos.isEmpty()) {
+            cofre = cofrinhos.get(idtmp);
+            nome = op.ObtemNome(cofre);
+            jTpegarid.setText("");
+            jTelaSaida.append("Olá " + nome + "!");
+        }
+        else{
+        jTelaSaida.append("Erro, não há nenhum cofre ainda!");
+        }
+
 
     }//GEN-LAST:event_jBpegaidActionPerformed
 
     private void jBnovoCofrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoCofrinhoActionPerformed
-        String op = JOptionPane.showInputDialog("Digite seu nome:");
-        iglobal=iglobal+1;
-        idtmp=iglobal;
-        c1=new CofrinhoDAO();
-        c1.NovoCofrinho(op,idtmp);
+        jTelaSaida.setText("");
+        jTStatusPoupanca.setText("");
+        String name = JOptionPane.showInputDialog("Digite seu nome:");
+
+        iglobal = iglobal + 1;
+        idtmp = iglobal;
+
+        cofre = new Cofrinho(idtmp,name);
+       // cofre.id = idtmp;
+       // cofre.nome = name;
+        cofrinhos.add(cofre);
+        cofre = cofrinhos.get(idtmp);
+        System.out.println("idtmp" + idtmp);
+        // System.out.println("check"+check);
+        System.out.println("iglobal" + iglobal);
+
+        jTelaSaida.append("Cofrinho criado! Seja bem-vindo(a) " + name + "!");
+
+
     }//GEN-LAST:event_jBnovoCofrinhoActionPerformed
 
     private void jTpegaridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpegaridActionPerformed
@@ -330,43 +518,136 @@ public class TelaCofrinho extends javax.swing.JFrame {
     }//GEN-LAST:event_jTpegaridActionPerformed
 
     private void jBretirarvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBretirarvalorActionPerformed
-        String p = jTretirarvalor.getText();
-        float x = Float.parseFloat(p);
-        c1=new CofrinhoDAO();
-        c1.RetirarMoeda(x,idtmp);
+        String retirar = jTretirarvalor.getText();
+        int x = Integer.parseInt(retirar);
+        float valor_antes = op.ValorTotal(cofre);
+        boolean sucesso = false;
+        cofre = cofrinhos.get(idtmp);
+        jTretirarvalor.setText("");
+
+        for (int i = 0; i != quant; i++) {
+            sucesso = op.RetirarMoeda(cofre, x);
+        }
+        if (sucesso == true) {
+            jTelaSaida.append("\nMoedas retiradas com sucesso!");
+            float valor_depois = op.ValorTotal(cofre);
+            boolean status = op.FinanceController(valor_antes, valor_depois);
+
+            if (status == true) {
+                jTStatusPoupanca.setText("Atenção! Poupança reduzida em mais de 50%!");
+
+            } else {
+                jTStatusPoupanca.setText("Estável, Poupança reduzida em menos de 50%.");
+
+            }
+        } else {
+            jTelaSaida.append("\nValor incorreto inserido, tente novamente.");
+        }
+
     }//GEN-LAST:event_jBretirarvalorActionPerformed
 
     private void jBinserirvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinserirvalorActionPerformed
 
-        String a = jTinserirvalor.getText();
+        String inserir = jTinserirvalor.getText();
+        int f = Integer.parseInt(inserir);
+        boolean sucesso = false;
+        cofre = cofrinhos.get(idtmp);
+        jTinserirvalor.setText("");
 
-        float f = Float.parseFloat(a);
-        m1=new Moeda(f);
-        c1=new CofrinhoDAO();
-        c1.inserirMoeda(m1, idtmp);
+        for (int i = 0; i != quant; i++) {
+            sucesso = op.InserirMoeda(cofre, f);
+        }
+        if (sucesso = true) {
+            jTelaSaida.append("\nMoedas inseridas com sucesso!");
+        } else {
+            jTelaSaida.append("\nValor incorreto inserido, tente novamente.");
+        }
+
 
     }//GEN-LAST:event_jBinserirvalorActionPerformed
 
     private void jsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jsairActionPerformed
-        this.dispose();
+        jTelaSaida.setText("");
+        jTStatusPoupanca.setText("");
     }//GEN-LAST:event_jsairActionPerformed
 
     private void jBMaiorMoedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMaiorMoedaActionPerformed
-        c1= new CofrinhoDAO();
-        c1.buscarMaiorMoeda(idtmp);
+        cofre = cofrinhos.get(idtmp);
+        String maior = op.MaiorMoeda(cofre);
+        jTelaSaida.append("\nMaior moeda: " + maior);
 
     }//GEN-LAST:event_jBMaiorMoedaActionPerformed
 
     private void jvalorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvalorTotalActionPerformed
-        c1=new CofrinhoDAO();
-        c1.valorTotal(idtmp);
-        c1.numeroDeMoedas(idtmp);
-        c1.MoedasNoCofrinho(idtmp);
+        cofre = cofrinhos.get(idtmp);
+        float total = op.ValorTotal(cofre);
+        jTelaSaida.append("\nValor total no cofre: " + Float.toString(total));
 
     }//GEN-LAST:event_jvalorTotalActionPerformed
 
-    
-    
+    private void jBpegaQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpegaQuantidadeActionPerformed
+        quant = Integer.parseInt(jTquantidade.getText());
+        jTquantidade.setText("");
+    }//GEN-LAST:event_jBpegaQuantidadeActionPerformed
+
+    private void jBMenorMoedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMenorMoedaActionPerformed
+        cofre = cofrinhos.get(idtmp);
+        String menor = op.MenorMoeda(cofre);
+        jTelaSaida.append("\nMenor moeda: " + menor);
+    }//GEN-LAST:event_jBMenorMoedaActionPerformed
+
+    private void jBMoedasNoCofreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMoedasNoCofreActionPerformed
+        List<String> moedas = new ArrayList<>();
+        cofre = cofrinhos.get(idtmp);
+        moedas = op.MoedasNoCofre(cofre);
+        jTelaSaida.append("\nMoedas no cofre:");
+        for (int i = 0; i != moedas.size(); i++) {
+            jTelaSaida.append("\n" + moedas.get(i));
+        }
+    }//GEN-LAST:event_jBMoedasNoCofreActionPerformed
+
+    private void jBCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCambioActionPerformed
+        List<String> cambio = new ArrayList<>();
+        cofre = cofrinhos.get(idtmp);
+        cambio = op.Cambio(op.ValorTotal(cofre));
+        String dolar = cambio.get(0);
+        String euro = cambio.get(1);
+        NumberFormat formatter = new DecimalFormat("0.00");
+        jTelaSaida.append("\n Valor total em dólares: " + formatter.format(Float.parseFloat(dolar)) + " dólares");
+        jTelaSaida.append("\n Valor total em euros: " + formatter.format(Float.parseFloat(euro)) + " euros");
+
+    }//GEN-LAST:event_jBCambioActionPerformed
+
+    private void jScrollPane1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1ComponentMoved
+
+    private void jBexportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBexportActionPerformed
+        WriteCSV wcsv = new WriteCSV();
+        if (!cofrinhos.isEmpty()) {
+            wcsv.WritingCSV(cofrinhos);
+            jTelaSaida.append("\n Arquivo Exportado com sucesso!");
+
+        } else {
+            jTelaSaida.append("\n Não há dados para exportar.");
+
+        }
+    }//GEN-LAST:event_jBexportActionPerformed
+
+    private void jBimportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBimportActionPerformed
+        try {
+            Path via = Paths.get(ClassLoader.getSystemResource("Cofrinhos.csv").toURI());
+            Path csv_via = null;
+            cofrinhos = OpenCSV.LerCsv(csv_via);
+            jTelaSaida.append("\n Dados importados com sucesso");
+
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(TelaCofrinho.class.getName()).log(Level.SEVERE, null, ex);
+            jTelaSaida.append("\n Arquivo Csv não encontrado.");
+
+        }
+    }//GEN-LAST:event_jBimportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -403,13 +684,24 @@ public class TelaCofrinho extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCambio;
     private javax.swing.JButton jBMaiorMoeda;
+    private javax.swing.JButton jBMenorMoeda;
+    private javax.swing.JButton jBMoedasNoCofre;
+    private javax.swing.JButton jBexport;
+    private javax.swing.JButton jBimport;
     private javax.swing.JButton jBinserirvalor;
     private javax.swing.JButton jBnovoCofrinho;
+    private javax.swing.JButton jBpegaQuantidade;
     private javax.swing.JButton jBpegaid;
     private javax.swing.JButton jBretirarvalor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -419,9 +711,12 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTStatusPoupanca;
+    private javax.swing.JTextArea jTelaSaida;
     private javax.swing.JTextField jTinserirvalor;
     private javax.swing.JTextField jTpegarid;
+    private javax.swing.JTextField jTquantidade;
     private javax.swing.JTextField jTretirarvalor;
     private javax.swing.JButton jsair;
     private javax.swing.JButton jvalorTotal;
