@@ -9,7 +9,7 @@
 
 ### O que é este Projeto?
 #
-Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por múltiplos usuários(cada um tem um id em um banco de dados), com as seguintes funções:
+Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por múltiplos usuários(cada um tem um id), com as seguintes funções:
 
 :pushpin:Inserir moedas
 
@@ -21,13 +21,15 @@ Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por 
 
 :pushpin:Quais moedas estão no cofre
 
-:bow_and_arrow: Todos os métodos que se relacionam com o banco de dados utilizado estão sendo testados!(JUnit)
+:bow_and_arrow: .....
+
+.....+ funções em implementação
 
 
 
 ### Tecnologias utilizadas
 #
-:white_check_mark:[Banco de dados SQL - MySQL Workbench((mysql-installer-community-8.0.27.0.msi)](https://dev.mysql.com/downloads/windows/installer/8.0.html)
+:white_check_mark:[Arquivos CSV](https://support.microsoft.com/pt-br/office/criar-ou-editar-arquivos-csv-para-importa%C3%A7%C3%A3o-para-o-outlook-4518d70d-8fe9-46ad-94fa-1494247193c7)
 
 :white_check_mark:[JUnit tests 5](https://junit.org/junit5/)
 
@@ -45,10 +47,10 @@ Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por 
 
 :two:Abra-o utilizando o Apache Netbeans 12.0
 
-:three:[Importe](https://stackoverflow.com/questions/15884693/how-can-i-import-data-into-mysql-database-via-mysql-workbench) o script do banco de dados em seu MySQL Workbench e mantenha o banco de dados aberto
+:three:
 
-:four:Execute a classe "TelaCofrinho.java"
+:four:
 
-:five:Será aberta a janela do cofre, onde você pode realizar as funções já escritas anteriormente!
+:five:
 
 
