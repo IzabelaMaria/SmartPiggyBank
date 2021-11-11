@@ -25,4 +25,5 @@ hs_err_pid*
 #IDE files
 /target
 /build
+nbactions.xml
 /Cofre_Maven/nbproject/
