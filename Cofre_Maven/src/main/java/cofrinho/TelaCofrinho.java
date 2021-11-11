@@ -78,6 +78,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
         jBimport = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jBcleancsv = new javax.swing.JButton();
+        jBdeletarcofre = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COFRINHO INTELIGENTE");
@@ -304,6 +305,15 @@ public class TelaCofrinho extends javax.swing.JFrame {
             }
         });
 
+        jBdeletarcofre.setBackground(new java.awt.Color(255, 204, 204));
+        jBdeletarcofre.setText("Deletar cofre");
+        jBdeletarcofre.setBorder(null);
+        jBdeletarcofre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBdeletarcofreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -316,7 +326,9 @@ public class TelaCofrinho extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(392, 392, 392)
+                        .addGap(294, 294, 294)
+                        .addComponent(jBdeletarcofre, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jsair, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -394,7 +406,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
                                 .addComponent(jTquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBpegaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(364, 366, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,11 +428,6 @@ public class TelaCofrinho extends javax.swing.JFrame {
                             .addComponent(jBcleancsv, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                        .addGap(47, 47, 47))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -462,11 +469,17 @@ public class TelaCofrinho extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTStatusPoupanca, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jsair, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jsair, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jBnovoCofrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBdeletarcofre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                        .addGap(70, 70, 70))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -488,11 +501,28 @@ public class TelaCofrinho extends javax.swing.JFrame {
         jTStatusPoupanca.setText("");
         String txt = jTpegarid.getText();
         idtmp = Integer.parseInt(txt);
+        boolean exist = false;
+
         if (!cofrinhos.isEmpty()) {
-            cofre = cofrinhos.get(idtmp);
-            nome = op.ObtemNome(cofre);
-            jTpegarid.setText("");
-            jTelaSaida.append("Olá " + nome + "!");
+            
+            for (int i = 0; i < cofrinhos.size(); i++) {
+                if (cofrinhos.get(i).id == idtmp) {
+                    exist = true;
+
+                }
+
+            }
+            if (exist == true) {
+                cofre = cofrinhos.get(idtmp);
+                nome = op.ObtemNome(cofre);
+                jTpegarid.setText("");
+                jTelaSaida.append("Olá " + nome + "!");
+                
+            } else {
+                jTpegarid.setText("");
+                jTelaSaida.append("\n Cofre inexistente");
+            }
+
         } else {
             jTelaSaida.append("Erro, não há nenhum cofre ainda!");
             jTpegarid.setText("");
@@ -505,20 +535,48 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void jBnovoCofrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnovoCofrinhoActionPerformed
         jTelaSaida.setText("");
         jTStatusPoupanca.setText("");
-        String name = JOptionPane.showInputDialog("Digite seu nome:");
+        jTpegarid.setText("");
+        String nme = JOptionPane.showInputDialog("Digite seu nome:");
 
-        iglobal = iglobal + 1;
-        idtmp = iglobal;
-
-        // cofre.nome = name;
-        //  cofre.id = idtmp;
-        cofre = new Cofrinho(idtmp, name);
-
+        for (int i = 0; i < cofrinhos.size(); i++) {
+            if (cofrinhos.get(i).nome == nme) {
+                jTelaSaida.append("\n-Esse cofrinho já existe! possui id "+cofrinhos.get(i).id);
+                break;  
+            }
+            
+        }
+        
+        cofre = new Cofrinho();
         cofrinhos.add(cofre);
-        cofre = cofrinhos.get(idtmp);
+        
+        
+        if (cofrinhos.size() == 0) {
+            iglobal = -1;
 
-        jTelaSaida.append("Cofrinho criado! Seja bem-vindo(a) " + name + "!");
-        jTpegarid.setText(Integer.toBinaryString(idtmp));
+        } else if (cofrinhos.size() == 1) {
+            iglobal = 1;
+        } else {
+            
+            iglobal = cofrinhos.size()-1;
+        }
+
+        idtmp = iglobal;
+        
+        
+        cofre.nome = nme;
+        cofre.id = idtmp;
+       // cofre = new Cofrinho(idtmp, nme);
+
+        cofre = cofrinhos.get(idtmp);
+        
+
+        jTelaSaida.append("\n-Cofrinho criado! Seja bem-vindo(a) " + nme + "!");
+        jTelaSaida.append("\n-Seu id é "+idtmp);
+        
+        jTpegarid.setText(Integer.toString(idtmp));
+        
+        
+        iglobal = iglobal + 1;
 
 
     }//GEN-LAST:event_jBnovoCofrinhoActionPerformed
@@ -539,7 +597,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
             sucesso = op.RetirarMoeda(cofre, x);
         }
         if (sucesso == true) {
-            jTelaSaida.append("\nMoedas retiradas com sucesso!");
+            jTelaSaida.append("\n-Moedas retiradas com sucesso!");
             float valor_depois = op.ValorTotal(cofre);
             boolean status = op.FinanceController(valor_antes, valor_depois);
 
@@ -551,7 +609,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
 
             }
         } else {
-            jTelaSaida.append("\nValor incorreto inserido, tente novamente.");
+            jTelaSaida.append("\n-Valor incorreto inserido, tente novamente.");
         }
 
     }//GEN-LAST:event_jBretirarvalorActionPerformed
@@ -568,9 +626,9 @@ public class TelaCofrinho extends javax.swing.JFrame {
             sucesso = op.InserirMoeda(cofre, f);
         }
         if (sucesso = true) {
-            jTelaSaida.append("\nMoedas inseridas com sucesso!");
+            jTelaSaida.append("\n-Moedas inseridas com sucesso!");
         } else {
-            jTelaSaida.append("\nValor incorreto inserido, tente novamente.");
+            jTelaSaida.append("\n-Valor incorreto inserido, tente novamente.");
         }
 
 
@@ -584,14 +642,14 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void jBMaiorMoedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMaiorMoedaActionPerformed
         cofre = cofrinhos.get(idtmp);
         String maior = op.MaiorMoeda(cofre);
-        jTelaSaida.append("\nMaior moeda: " + maior);
+        jTelaSaida.append("\n-Maior moeda: " + maior);
 
     }//GEN-LAST:event_jBMaiorMoedaActionPerformed
 
     private void jvalorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jvalorTotalActionPerformed
         cofre = cofrinhos.get(idtmp);
         float total = op.ValorTotal(cofre);
-        jTelaSaida.append("\nValor total no cofre: " + Float.toString(total));
+        jTelaSaida.append("\n-Valor total no cofre: " + Float.toString(total));
 
     }//GEN-LAST:event_jvalorTotalActionPerformed
 
@@ -603,29 +661,29 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void jBMenorMoedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMenorMoedaActionPerformed
         cofre = cofrinhos.get(idtmp);
         String menor = op.MenorMoeda(cofre);
-        jTelaSaida.append("\n\nMenor moeda: " + menor);
+        jTelaSaida.append("\n-Menor moeda: " + menor);
     }//GEN-LAST:event_jBMenorMoedaActionPerformed
 
     private void jBMoedasNoCofreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMoedasNoCofreActionPerformed
         List<String> moedas = new ArrayList<>();
         cofre = cofrinhos.get(idtmp);
         moedas = op.MoedasNoCofre(cofre);
-        jTelaSaida.append("\nMoedas no cofre:");
+        jTelaSaida.append("\n\n-Moedas no cofre:");
         for (int i = 0; i != moedas.size(); i++) {
             if (moedas.get(i) == "5 centavos") {
-                jTelaSaida.append("\n" + moedas.get(i) + ", há " + cofre.Cinco_centavos + " moeda(s)");
+                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinco_centavos + " moeda(s)");
 
             } else if (moedas.get(i) == "10 centavos") {
-                jTelaSaida.append("\n" + moedas.get(i) + ", há " + cofre.Dez_centavos + " moeda(s)");
+                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Dez_centavos + " moeda(s)");
 
             } else if (moedas.get(i) == "25 centavos") {
-                jTelaSaida.append("\n" + moedas.get(i) + ", há " + cofre.VinteCinco_centavos + " moeda(s)");
+                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.VinteCinco_centavos + " moeda(s)");
 
             } else if (moedas.get(i) == "50 centavos") {
-                jTelaSaida.append("\n" + moedas.get(i) + ", há " + cofre.Cinquenta_centavos + " moeda(s)");
+                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinquenta_centavos + " moeda(s)");
 
             } else if (moedas.get(i) == "1 real") {
-                jTelaSaida.append("\n" + moedas.get(i) + ", há " + cofre.Um_real + " moeda(s)");
+                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Um_real + " moeda(s)");
             }
 
         }
@@ -639,8 +697,8 @@ public class TelaCofrinho extends javax.swing.JFrame {
         String dolar = cambio.get(0);
         String euro = cambio.get(1);
         NumberFormat formatter = new DecimalFormat("0.00");
-        jTelaSaida.append("\n Valor total em dólares: " + formatter.format(Float.parseFloat(dolar)) + " dólares");
-        jTelaSaida.append("\n Valor total em euros: " + formatter.format(Float.parseFloat(euro)) + " euros");
+        jTelaSaida.append("\n\n-Valor total em dólares: " + formatter.format(Float.parseFloat(dolar)) + " dólares");
+        jTelaSaida.append("\n-Valor total em euros: " + formatter.format(Float.parseFloat(euro)) + " euros");
 
     }//GEN-LAST:event_jBCambioActionPerformed
 
@@ -652,22 +710,24 @@ public class TelaCofrinho extends javax.swing.JFrame {
         WriteCSV wcsv = new WriteCSV();
         if (!cofrinhos.isEmpty()) {
             wcsv.WritingCSV(cofrinhos);
-            jTelaSaida.append("\n Arquivo Exportado com sucesso!");
+            jTelaSaida.append("\n-Arquivo Exportado com sucesso!");
 
         } else {
-            jTelaSaida.append("\n Não há dados para exportar.");
+            jTelaSaida.append("\n-Não há dados para exportar.");
 
-        }
+        } 
         
     }//GEN-LAST:event_jBexportActionPerformed
 
     private void jBimportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBimportActionPerformed
         try {
             Path via = Paths.get(ClassLoader.getSystemResource("cofrinhos.csv").toURI());
-        //    System.out.println("Path: " + via);
+            
             cofrinhos = OpenCSV.LerCsv(via);
             
-            jTelaSaida.append("\n Dados importados com sucesso");
+            
+            
+            jTelaSaida.append("\n-Dados importados com sucesso");
         } catch (URISyntaxException ex) {
             Logger.getLogger(TelaCofrinho.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -676,6 +736,30 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void jBcleancsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcleancsvActionPerformed
         op.Operatecsv(); 
     }//GEN-LAST:event_jBcleancsvActionPerformed
+
+    private void jBdeletarcofreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdeletarcofreActionPerformed
+        if (cofrinhos.contains(cofre)) {
+            
+            cofrinhos.remove(cofre);
+            WriteCSV wcsv = new WriteCSV();
+            
+            if (!cofrinhos.isEmpty()) {
+                wcsv.WritingCSV(cofrinhos);
+                jTpegarid.setText("");
+                jTelaSaida.append("\n Cofrinho Excluído.");
+
+            } else {
+                jTpegarid.setText("");
+                jTelaSaida.append("\n Não há cofres!");
+
+            }
+        } else {
+            jTelaSaida.append("\n Cofre inexistente");
+            
+        }
+        
+        
+    }//GEN-LAST:event_jBdeletarcofreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -718,6 +802,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private javax.swing.JButton jBMenorMoeda;
     private javax.swing.JButton jBMoedasNoCofre;
     private javax.swing.JButton jBcleancsv;
+    private javax.swing.JButton jBdeletarcofre;
     private javax.swing.JButton jBexport;
     private javax.swing.JButton jBimport;
     private javax.swing.JButton jBinserirvalor;
