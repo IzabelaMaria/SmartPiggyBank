@@ -1,5 +1,6 @@
 package cofrinho;
 
+import ManageCSV.WriteCSV;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,23 +143,27 @@ public class Operations {
 
         if (cofre.Cinco_centavos != 0) {
 
-            moedas.add("5 c");
+            moedas.add("5 centavos");
 
-        } else if (cofre.Dez_centavos!= 0) {
+        }
+        if (cofre.Dez_centavos!= 0) {
 
-            moedas.add("10 c");
+            moedas.add("10 centavos");
 
-        } else if (cofre.VinteCinco_centavos != 0) {
+        }
+        if (cofre.VinteCinco_centavos != 0) {
 
-            moedas.add("25 c");
+            moedas.add("25 centavos");
 
-        } else if (cofre.Cinquenta_centavos != 0) {
+        }
+        if (cofre.Cinquenta_centavos != 0) {
 
-            moedas.add("50 c");
+            moedas.add("50 centavos");
 
-        } else if (cofre.Um_real != 0) {
+        }
+        if (cofre.Um_real != 0) {
 
-            moedas.add("1 r");
+            moedas.add("1 real");
 
         }
 
@@ -190,9 +195,11 @@ public class Operations {
 
         cambio.add(Float.toString(EmDolar));
         cambio.add(Float.toString(EmEuros));
+        
 
         return cambio;
     }
+    
 
     public boolean FinanceController(float valor_antes, float valor_atual) {
 
@@ -211,6 +218,13 @@ public class Operations {
         }
 
         return alert;
+    }
+    
+    public void Operatecsv(){
+        WriteCSV w = new WriteCSV();
+        List<Cofrinho> initcsv = new ArrayList<>();
+        w.WritingCSV(initcsv);
+    
     }
 
 }
