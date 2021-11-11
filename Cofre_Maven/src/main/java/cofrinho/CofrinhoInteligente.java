@@ -7,10 +7,5 @@ public class CofrinhoInteligente {
         
         TelaCofrinho tela = new TelaCofrinho();
         tela.setVisible(true);
-        
-        
-        
-        
-    }
-    
-}
+  
+}}

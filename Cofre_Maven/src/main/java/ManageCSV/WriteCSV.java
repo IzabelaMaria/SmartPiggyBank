@@ -25,11 +25,11 @@ public class WriteCSV {
 
         Writer writer = null;
         try {
-            writer = Files.newBufferedWriter(Paths.get("src/main/resources/Cofrinhos.csv"));
+            //src/main/resources/cofrinhos.csv
+            writer = Files.newBufferedWriter(Paths.get("src/main/resources/cofrinhos.csv"));
             iscreate = true;
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
         CSVWriter csvWriter = new CSVWriter(writer);
 

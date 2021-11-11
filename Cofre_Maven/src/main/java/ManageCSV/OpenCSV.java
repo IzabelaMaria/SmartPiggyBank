@@ -8,6 +8,7 @@ package ManageCSV;
 import cofrinho.Cofrinho;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -25,7 +26,7 @@ public class OpenCSV {
             Reader reader = Files.newBufferedReader(csv_via);
             CsvToBean<Cofrinho> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(Cofrinho.class)
-                    .withIgnoreLeadingWhiteSpace(true)
+                    .withIgnoreEmptyLine(true)
                     .build();
 
             cofrinhos = csvToBean.parse();
