@@ -93,13 +93,14 @@ public class TelaCofrinho extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText(" $                                                COFRINHO INTELIGENTE                                                $");
+        jLabel1.setText(" $                                                COFRINHO INTELIGENTE                                             $");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -546,21 +547,23 @@ public class TelaCofrinho extends javax.swing.JFrame {
             
         }
         
-        cofre = new Cofrinho();
-        cofrinhos.add(cofre);
+        
         
         
         if (cofrinhos.size() == 0) {
-            iglobal = -1;
+            iglobal = 0;
 
         } else if (cofrinhos.size() == 1) {
             iglobal = 1;
         } else {
             
-            iglobal = cofrinhos.size()-1;
+            iglobal = cofrinhos.size();
         }
 
         idtmp = iglobal;
+        
+        cofre = new Cofrinho();
+        cofrinhos.add(cofre);
         
         
         cofre.nome = nme;
