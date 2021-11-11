@@ -664,7 +664,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
     private void jBimportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBimportActionPerformed
         try {
             Path via = Paths.get(ClassLoader.getSystemResource("cofrinhos.csv").toURI());
-            System.out.println("Path: " + via);
+        //    System.out.println("Path: " + via);
             cofrinhos = OpenCSV.LerCsv(via);
             
             jTelaSaida.append("\n Dados importados com sucesso");
