@@ -12,7 +12,7 @@ public class Cofrinho {
     public int VinteCinco_centavos = 0;
     public int Cinquenta_centavos = 0;
     public int Um_real = 0;
-    public int Valor_Total = 0;
+    public float Valor_Total = 0;
     public String name;
     
     public Cofrinho(int user_id,String name){
