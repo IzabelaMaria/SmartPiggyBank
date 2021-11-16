@@ -52,6 +52,17 @@ public class OperationsTest {
 
     }
 
+    @Test
+    public void testRetirarMoeda() {
+        System.out.println("RetirarMoeda");
+        Cofrinho cofre = null;
+        int moeda = 0;
+        Operations instance = new Operations();
+        boolean expResult = false;
+       boolean result = instance.RetirarMoeda(cofre, moeda);
+        assertEquals(expResult, result);
+
+    }
 
     
 }
