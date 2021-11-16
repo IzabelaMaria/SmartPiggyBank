@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 public class TelaCofrinho extends javax.swing.JFrame {
 
@@ -582,7 +581,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
     }//GEN-LAST:event_jBnovoCofrinhoActionPerformed
 
     private void jTpegaridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpegaridActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jTpegaridActionPerformed
 
     private void jBretirarvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBretirarvalorActionPerformed
