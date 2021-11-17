@@ -152,5 +152,22 @@ public class OperationsTest {
         assertEquals(cambio, result);
 
     }
+    
+    
+    
+        @Test
+    public void testFinanceController() {
+        System.out.println("FinanceController");
+        float valor_antes = 100;
+        float valor_atual = 20;
+        Operations instance = new Operations();
+        boolean expResult = true;
+        boolean result = instance.FinanceController(valor_antes, valor_atual);
+        assertEquals(expResult, result);
+
+    }
+
+    
+    
 
 }
