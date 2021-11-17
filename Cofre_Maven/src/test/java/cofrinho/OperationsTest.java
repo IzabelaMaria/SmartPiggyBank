@@ -6,6 +6,7 @@ package cofrinho;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -101,11 +102,26 @@ public class OperationsTest {
         Operations instance = new Operations();
         instance.InserirMoeda(cofre, 5);
         instance.InserirMoeda(cofre, 10);
-        instance.MaiorMoeda(cofre); 
         NumberFormat formatter = new DecimalFormat("0.00");
         float result = instance.ValorTotal(cofre);
         assertEquals("0,15" , formatter.format(result));
 
+
+    }
+
+        @Test
+    public void testMoedasNoCofre() {
+        System.out.println("MoedasNoCofre");
+        Cofrinho cofre = new Cofrinho();
+        Operations instance = new Operations();
+        List<String> moedas = new ArrayList<>();
+        instance.InserirMoeda(cofre, 10);
+        instance.InserirMoeda(cofre, 20);
+        instance.MoedasNoCofre(cofre);
+        moedas.add("10 centavos");
+        moedas.add("20 centavos");
+        List<String> result = instance.MoedasNoCofre(cofre);
+        assertEquals(moedas, result);
 
     }
 
