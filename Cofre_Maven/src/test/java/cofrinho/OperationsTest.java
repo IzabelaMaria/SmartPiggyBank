@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+
 /**
  *
  * @author 55359
@@ -51,6 +52,21 @@ public class OperationsTest {
         assertEquals(expResult, result);
 
     }
+    
+        @Test
+    public void testMaiorMoeda() {
+        System.out.println("MaiorMoeda");
+        Cofrinho cofre = new Cofrinho();
+        Operations instance = new Operations();
+        instance.InserirMoeda(cofre, 5);
+        instance.InserirMoeda(cofre, 10);
+        String expResult = "";
+        String result = instance.MaiorMoeda(cofre);
+        assertEquals("10 centavos", result);
+
+    }
+
+
 
     @Test
     public void testRetirarMoeda() {
@@ -64,5 +80,4 @@ public class OperationsTest {
 
     }
 
-    
-}
+
