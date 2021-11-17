@@ -139,5 +139,18 @@ public class OperationsTest {
 
     
     
+    @Test
+    public void testCambio() {
+        System.out.println("Cambio");
+        List<String> cambio = new ArrayList<>();
+        Operations instance = new Operations();
+        float dolar = (float) (6/5.48);
+        float euro = (float) (6/6.36);
+        cambio.add(Float.toString(dolar));
+        cambio.add(Float.toString(euro));
+        List<String> result = instance.Cambio(6);
+        assertEquals(cambio, result);
+
+    }
 
 }
