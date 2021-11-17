@@ -125,7 +125,18 @@ public class OperationsTest {
 
     }
 
-    
+        @Test
+    public void testObtemNome() {
+        System.out.println("ObtemNome");
+        Cofrinho cofre = new Cofrinho();
+        cofre.nome = "Marines";
+        Operations instance = new Operations();
+        instance.ObtemNome(cofre);
+        String result = instance.ObtemNome(cofre);
+        assertEquals("Marines", result);
+
+    }
+
     
     
 
