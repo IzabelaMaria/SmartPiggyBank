@@ -60,7 +60,6 @@ public class OperationsTest {
         Operations instance = new Operations();
         instance.InserirMoeda(cofre, 5);
         instance.InserirMoeda(cofre, 10);
-        String expResult = "";
         String result = instance.MaiorMoeda(cofre);
         assertEquals("10 centavos", result);
 
@@ -79,5 +78,23 @@ public class OperationsTest {
         assertEquals(expResult, result);
 
     }
+    
+    
+        @Test
+    public void testMenorMoeda() {
+        System.out.println("MenorMoeda");
+        Cofrinho cofre = new Cofrinho();
+        Operations instance = new Operations();
+        instance.InserirMoeda(cofre, 5);
+        instance.InserirMoeda(cofre, 10);
+        String result = instance.MenorMoeda(cofre);
+        assertEquals("5 centavos", result);
+    }
 
+    
+    
+    
+    
+    
 
+}
