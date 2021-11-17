@@ -4,6 +4,8 @@
  */
 package cofrinho;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -92,7 +94,21 @@ public class OperationsTest {
     }
 
     
-    
+        @Test
+    public void testValorTotal() {
+        System.out.println("ValorTotal");
+        Cofrinho cofre = new Cofrinho();
+        Operations instance = new Operations();
+        instance.InserirMoeda(cofre, 5);
+        instance.InserirMoeda(cofre, 10);
+        instance.MaiorMoeda(cofre); 
+        NumberFormat formatter = new DecimalFormat("0.00");
+        float result = instance.ValorTotal(cofre);
+        assertEquals("0,15" , formatter.format(result));
+
+
+    }
+
     
     
     
