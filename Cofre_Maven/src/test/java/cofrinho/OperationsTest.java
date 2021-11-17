@@ -116,10 +116,10 @@ public class OperationsTest {
         Operations instance = new Operations();
         List<String> moedas = new ArrayList<>();
         instance.InserirMoeda(cofre, 10);
-        instance.InserirMoeda(cofre, 20);
-        instance.MoedasNoCofre(cofre);
+        instance.InserirMoeda(cofre, 25);
         moedas.add("10 centavos");
-        moedas.add("20 centavos");
+        moedas.add("25 centavos");
+        //instance.MoedasNoCofre(cofre);
         List<String> result = instance.MoedasNoCofre(cofre);
         assertEquals(moedas, result);
 
