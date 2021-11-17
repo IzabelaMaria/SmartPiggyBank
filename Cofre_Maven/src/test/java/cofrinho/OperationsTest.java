@@ -4,6 +4,7 @@
  */
 package cofrinho;
 
+import ManageCSV.WriteCSV;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -166,6 +167,8 @@ public class OperationsTest {
         assertEquals(expResult, result);
 
     }
+
+
 
     
     

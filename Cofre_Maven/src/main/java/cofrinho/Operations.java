@@ -224,7 +224,6 @@ public class Operations {
         WriteCSV w = new WriteCSV();
         List<Cofrinho> initcsv = new ArrayList<>();
         w.WritingCSV(initcsv);
-    
     }
 
 }
