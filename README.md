@@ -2,14 +2,18 @@
 
 #
 <p align="center">
-  :construction: EM CONSTRUÇÃO :construction:
+  Status do Projeto: Em desenvolvimento :warning:
 </p>
 
 #
 
 ### O que é este Projeto?
 #
-Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por múltiplos usuários(cada um tem um id), com as seguintes funções:
+Este projeto implementa um cofrinho inteligente virtual, que pode ser utilizado por vários usuários, em que cada usuário cadastrado possui um id. Tem-se as seguintes funções:
+
+:pushpin: Inserir id (caso a pessoa já tenha um cofre)
+
+:pushpin:Quantidade de moedas que deseja inserir no cofre
 
 :pushpin:Inserir moedas
 
@@ -17,13 +21,26 @@ Este projeto implementa um cofrinho inteligente virtual, que pode ser usado por 
 
 :pushpin:Verificar qual a moeda de maior valor
 
-:pushpin:Valor total de moedas
+:pushpin:Verificar qual a moeda de menor valor
 
-:pushpin:Quais moedas estão no cofre
+:pushpin:Valor total de moedas no cofre
 
-:bow_and_arrow: .....
+:pushpin:Verificar quais moedas estão no cofre
 
-.....+ funções em implementação
+:pushpin:Converter poupança para dólar/euro
+
+:pushpin:Criar um novo cofrinho
+
+:pushpin:Exportar arquivo
+
+:pushpin:Importar dados 
+
+:pushpin:Limpar dados
+
+:pushpin:Deletar cofre
+
+:pushpin:Sair
+
 
 
 
