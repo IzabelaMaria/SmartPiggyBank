@@ -92,13 +92,14 @@ public class TelaCofrinho extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText(" $                                                COFRINHO INTELIGENTE                                                $");
+        jLabel1.setText(" $                                                COFRINHO INTELIGENTE                                             $");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -538,28 +539,30 @@ public class TelaCofrinho extends javax.swing.JFrame {
         String nme = JOptionPane.showInputDialog("Digite seu nome:");
 
         for (int i = 0; i < cofrinhos.size(); i++) {
-            if (cofrinhos.get(i).nome == nme) {
+            if (cofrinhos.get(i).nome == null ? nme == null : cofrinhos.get(i).nome.equals(nme)) {
                 jTelaSaida.append("\n-Esse cofrinho já existe! possui id "+cofrinhos.get(i).id);
                 break;  
             }
             
         }
         
-        cofre = new Cofrinho();
-        cofrinhos.add(cofre);
         
         
-        if (cofrinhos.size() == 0) {
-            iglobal = -1;
+        
+        if (cofrinhos.isEmpty()) {
+            iglobal = 0;
 
         } else if (cofrinhos.size() == 1) {
             iglobal = 1;
         } else {
             
-            iglobal = cofrinhos.size()-1;
+            iglobal = cofrinhos.size();
         }
 
         idtmp = iglobal;
+        
+        cofre = new Cofrinho();
+        cofrinhos.add(cofre);
         
         
         cofre.nome = nme;
@@ -581,7 +584,7 @@ public class TelaCofrinho extends javax.swing.JFrame {
     }//GEN-LAST:event_jBnovoCofrinhoActionPerformed
 
     private void jTpegaridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTpegaridActionPerformed
-       
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTpegaridActionPerformed
 
     private void jBretirarvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBretirarvalorActionPerformed
@@ -669,20 +672,24 @@ public class TelaCofrinho extends javax.swing.JFrame {
         moedas = op.MoedasNoCofre(cofre);
         jTelaSaida.append("\n\n-Moedas no cofre:");
         for (int i = 0; i != moedas.size(); i++) {
-            if (moedas.get(i) == "5 centavos") {
-                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinco_centavos + " moeda(s)");
-
-            } else if (moedas.get(i) == "10 centavos") {
-                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Dez_centavos + " moeda(s)");
-
-            } else if (moedas.get(i) == "25 centavos") {
-                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.VinteCinco_centavos + " moeda(s)");
-
-            } else if (moedas.get(i) == "50 centavos") {
-                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinquenta_centavos + " moeda(s)");
-
-            } else if (moedas.get(i) == "1 real") {
-                jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Um_real + " moeda(s)");
+            if (null != moedas.get(i)) switch (moedas.get(i)) {
+                case "5 centavos":
+                    jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinco_centavos + " moeda(s)");
+                    break;
+                case "10 centavos":
+                    jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Dez_centavos + " moeda(s)");
+                    break;
+                case "25 centavos":
+                    jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.VinteCinco_centavos + " moeda(s)");
+                    break;
+                case "50 centavos":
+                    jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Cinquenta_centavos + " moeda(s)");
+                    break;
+                case "1 real":
+                    jTelaSaida.append("\n-" + moedas.get(i) + ", há " + cofre.Um_real + " moeda(s)");
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -788,10 +795,8 @@ public class TelaCofrinho extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCofrinho().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaCofrinho().setVisible(true);
         });
     }
 

@@ -4,7 +4,6 @@
  */
 package cofrinho;
 
-import ManageCSV.WriteCSV;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -16,31 +15,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 /**
  *
  * @author 55359
  */
 public class OperationsTest {
-    
-    public OperationsTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+
+
 
     /**
      * Test of InserirMoeda method, of class Operations.
@@ -56,8 +37,8 @@ public class OperationsTest {
         assertEquals(expResult, result);
 
     }
-    
-        @Test
+
+    @Test
     public void testMaiorMoeda() {
         System.out.println("MaiorMoeda");
         Cofrinho cofre = new Cofrinho();
@@ -69,8 +50,6 @@ public class OperationsTest {
 
     }
 
-
-
     @Test
     public void testRetirarMoeda() {
         System.out.println("RetirarMoeda");
@@ -78,13 +57,12 @@ public class OperationsTest {
         int moeda = 0;
         Operations instance = new Operations();
         boolean expResult = false;
-       boolean result = instance.RetirarMoeda(cofre, moeda);
+        boolean result = instance.RetirarMoeda(cofre, moeda);
         assertEquals(expResult, result);
 
     }
-    
-    
-        @Test
+
+    @Test
     public void testMenorMoeda() {
         System.out.println("MenorMoeda");
         Cofrinho cofre = new Cofrinho();
@@ -95,8 +73,7 @@ public class OperationsTest {
         assertEquals("5 centavos", result);
     }
 
-    
-        @Test
+    @Test
     public void testValorTotal() {
         System.out.println("ValorTotal");
         Cofrinho cofre = new Cofrinho();
@@ -105,12 +82,11 @@ public class OperationsTest {
         instance.InserirMoeda(cofre, 10);
         NumberFormat formatter = new DecimalFormat("0.00");
         float result = instance.ValorTotal(cofre);
-        assertEquals("0,15" , formatter.format(result));
-
+        assertEquals("0,15", formatter.format(result));
 
     }
 
-        @Test
+    @Test
     public void testMoedasNoCofre() {
         System.out.println("MoedasNoCofre");
         Cofrinho cofre = new Cofrinho();
@@ -120,13 +96,13 @@ public class OperationsTest {
         instance.InserirMoeda(cofre, 25);
         moedas.add("10 centavos");
         moedas.add("25 centavos");
-        //instance.MoedasNoCofre(cofre);
+        // instance.MoedasNoCofre(cofre);
         List<String> result = instance.MoedasNoCofre(cofre);
         assertEquals(moedas, result);
 
     }
 
-        @Test
+    @Test
     public void testObtemNome() {
         System.out.println("ObtemNome");
         Cofrinho cofre = new Cofrinho();
@@ -138,25 +114,21 @@ public class OperationsTest {
 
     }
 
-    
-    
     @Test
-    public void testCambio() {
+    public void testCambio() throws Exception {
         System.out.println("Cambio");
         List<String> cambio = new ArrayList<>();
         Operations instance = new Operations();
-        float dolar = (float) (6/5.48);
-        float euro = (float) (6/6.36);
+        float dolar = (float) (6 / 5.48);
+        float euro = (float) (6 / 6.36);
         cambio.add(Float.toString(dolar));
         cambio.add(Float.toString(euro));
         List<String> result = instance.Cambio(6);
         assertEquals(cambio, result);
 
     }
-    
-    
-    
-        @Test
+
+    @Test
     public void testFinanceController() {
         System.out.println("FinanceController");
         float valor_antes = 100;
@@ -167,10 +139,5 @@ public class OperationsTest {
         assertEquals(expResult, result);
 
     }
-
-
-
-    
-    
 
 }

@@ -1,4 +1,4 @@
-package cofrinho;
+ package cofrinho;
 
 import lombok.Data;
 @Data

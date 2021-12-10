@@ -9,28 +9,29 @@ public class Operations {
     public boolean InserirMoeda(Cofrinho cofre, int moeda) {
 
         boolean sucesso = false;
-        if (moeda == 5) {
-
-            cofre.Cinco_centavos += 1;
-            sucesso = true;
-
-        } else if (moeda == 10) {
-
-            cofre.Dez_centavos += 1;
-            sucesso = true;
-
-        } else if (moeda == 25) {
-
-            cofre.VinteCinco_centavos += 1;
-            sucesso = true;
-        } else if (moeda == 50) {
-
-            cofre.Cinquenta_centavos += 1;
-            sucesso = true;
-        } else if (moeda == 1) {
-
-            cofre.Um_real += 1;
-            sucesso = true;
+        switch (moeda) {
+            case 5:
+                cofre.Cinco_centavos += 1;
+                sucesso = true;
+                break;
+            case 10:
+                cofre.Dez_centavos += 1;
+                sucesso = true;
+                break;
+            case 25:
+                cofre.VinteCinco_centavos += 1;
+                sucesso = true;
+                break;
+            case 50:
+                cofre.Cinquenta_centavos += 1;
+                sucesso = true;
+                break;
+            case 1:
+                cofre.Um_real += 1;
+                sucesso = true;
+                break;
+            default:
+                break;
         }
         return sucesso;
     }
@@ -39,28 +40,29 @@ public class Operations {
 
        
         boolean sucesso = false;
-        if (moeda == 5) {
-
-            cofre.Cinco_centavos -= 1;
-            sucesso = true;
-
-        } else if (moeda == 10) {
-
-            cofre.Dez_centavos -= 1;
-            sucesso = true;
-
-        } else if (moeda == 25) {
-
-            cofre.VinteCinco_centavos -= 1;
-            sucesso = true;
-        } else if (moeda == 50) {
-
-            cofre.Cinquenta_centavos -= 1;
-            sucesso = true;
-        } else if (moeda == 1) {
-
-            cofre.Um_real -= 1;
-            sucesso = true;
+        switch (moeda) {
+            case 5:
+                cofre.Cinco_centavos -= 1;
+                sucesso = true;
+                break;
+            case 10:
+                cofre.Dez_centavos -= 1;
+                sucesso = true;
+                break;
+            case 25:
+                cofre.VinteCinco_centavos -= 1;
+                sucesso = true;
+                break;
+            case 50:
+                cofre.Cinquenta_centavos -= 1;
+                sucesso = true;
+                break;
+            case 1:
+                cofre.Um_real -= 1;
+                sucesso = true;
+                break;
+            default:
+                break;
         }
         return sucesso;
     }
@@ -187,8 +189,8 @@ public class Operations {
 
         float dolar_dia = (float) 5.48;
         float euro_dia = (float) 6.36;
-        float EmDolar = 0;
-        float EmEuros = 0;
+        float EmDolar;
+        float EmEuros;
 
         EmDolar = (float) (valor / dolar_dia);
         EmEuros = (float) (valor / euro_dia);
@@ -203,7 +205,7 @@ public class Operations {
 
     public boolean FinanceController(float valor_antes, float valor_atual) {
 
-        float temp_calc = 0;
+        float temp_calc;
         boolean alert = false;
         
         System.out.println("vantes"+valor_antes);
@@ -224,6 +226,7 @@ public class Operations {
         WriteCSV w = new WriteCSV();
         List<Cofrinho> initcsv = new ArrayList<>();
         w.WritingCSV(initcsv);
+    
     }
 
 }
